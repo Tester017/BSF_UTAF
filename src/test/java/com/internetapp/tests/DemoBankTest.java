@@ -4,6 +4,7 @@ import com.api.service.Reqres;
 import com.codoid.products.exception.FilloException;
 import com.internetapp.pages.DBLoginPage;
 import com.maveric.core.testng.BaseTest;
+import com.maveric.core.testng.listeners.DriverListener;
 import com.maveric.core.utils.data.ExcelDataReader;
 
 import org.testng.Assert;
@@ -16,8 +17,9 @@ public class DemoBankTest extends BaseTest {
 	
 	@Test(groups = {"web"},dataProvider="ExcelInputs")
     public void verifyLoginWithInvalidCredentials(String tcId) throws FilloException, InterruptedException {
-
-       new DBLoginPage()
+		
+		DriverListener.testCase.set(tcId);
+		new DBLoginPage()
        .navigateUpdated("http://dbankdemo.com/login", "desktop-web")
        .login(ExcelDataReader.getData("Sheet1", tcId,"SrcUserName"),
     		   ExcelDataReader.getData("Sheet1", tcId,"SrcPassword"))
