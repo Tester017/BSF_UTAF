@@ -34,6 +34,8 @@ public class CommonDef extends WebActions{
 	    	}
 				
 			driver.navigate().to(url);
+			waitForPageLoad();
+			System.out.println(driver);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	        logScreenshot("login");
@@ -73,10 +75,13 @@ public class CommonDef extends WebActions{
 	}
 	
 	public void waitForPageLoad() {
-		driver = DriverFactory.getCurrentDriver();
-		ExpectedCondition<Boolean> expect = new ExpectedCondition<Boolean>() {
-//			@Override
-			public Boolean apply(WebDriver driver) {
+//		driver = DriverFactory.getCurrentDriver();
+		ExpectedCondition<Boolean> expect = new ExpectedCondition<Boolean>() 
+		{
+			public Boolean apply(WebDriver driver) 
+			{
+				System.out.println(driver);
+
 				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 			}
 		};
