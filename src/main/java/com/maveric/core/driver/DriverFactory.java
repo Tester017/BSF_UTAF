@@ -31,7 +31,6 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 
 public class DriverFactory {
-//	private static ThreadLocal<WebDriver> currentDriver = new ThreadLocal<WebDriver>();
 
 	static WebDriver driver;
 
@@ -51,15 +50,6 @@ public class DriverFactory {
     }
     
     
-    
-    /*public static WebDriver getCurrentDriver() {
-    	 driver = currentDriver.get();
- 		if (driver != null) {
- 			return driver;
- 		} else {
- 			return null;
- 		}
-	}*/
 
     public WebDriver driverSetup() {
     	

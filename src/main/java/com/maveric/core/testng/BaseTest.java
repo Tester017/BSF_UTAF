@@ -41,7 +41,7 @@ public class BaseTest extends WebActions{
 		};
 	}
 	
-	@DataProvider(name="ExcelInputs",parallel=false)
+	@DataProvider(name="ExcelInputs",parallel=true)
 	public Object[] getExcelData() throws FilloException {
 		return ExcelDataReader.getControlData("Sheet1", "TC_ID");
 	}

@@ -45,6 +45,8 @@ public class DriverListener implements ISuiteListener, ITestListener, IInvokedMe
 	public static boolean isCucumber = false;
     private DriverFactory driverFactory;
     public static ThreadLocal<String> tests = new ThreadLocal<>();
+    public static ThreadLocal<String> testCase = new ThreadLocal<>();
+
 
     @Override
     public void onStart(ISuite suite) {
@@ -52,7 +54,6 @@ public class DriverListener implements ISuiteListener, ITestListener, IInvokedMe
 		File reportsFolder = new File(reportFolder);
 		File screenShotsFolder = new File(reportsFolder + "/screenshots");
 		reportsFolder.mkdirs();
-
 		logger.info("reports folder created successfully :" + reportFolder);
 		screenShotsFolder.mkdirs();
 		screenshotFolder = reportsFolder + "/screenshots";

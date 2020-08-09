@@ -25,7 +25,7 @@ public class WebActions {
 
     public void logScreenshot(String name) {
         String path = captureScreenshot();
-        String html = "<a target=_blank href=" + "screenshots" + path.replaceAll(" ", "%20") + ">" + name + "  </a>";
+        String html = "<a target=_blank href=" + "screenshots/"+DriverListener.testCase.get() + path.replaceAll(" ", "%20") + ">" + name + "  </a>";
         Report.log(html);
     }
 
@@ -41,7 +41,8 @@ public class WebActions {
             TakesScreenshot ts = (TakesScreenshot) driver;
             File file = ts.getScreenshotAs(OutputType.FILE);
             screenshotName = "/screenshot" + "_" + getId() + ".png";
-            String screenshotPath = DriverListener.screenshotFolder + screenshotName;
+            File tcFolder = new File(DriverListener.screenshotFolder+"/"+DriverListener.testCase.get());
+            String screenshotPath = tcFolder + screenshotName;
             System.out.println(screenshotPath);
             FileUtils.copyFile(file, new File(screenshotPath));
 
