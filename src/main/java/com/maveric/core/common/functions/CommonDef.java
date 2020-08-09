@@ -78,6 +78,7 @@ public class CommonDef extends WebActions{
 	
 	public void sendKeys(By ele, String data) {
 		try {
+			//daniel
 			driver.findElement(ele).sendKeys(data);
 			logScreenshot("The Data :"+data+" entered Successfully");
 		} catch (ElementNotInteractableException e) {
