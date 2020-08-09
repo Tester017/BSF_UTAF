@@ -4,7 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -66,6 +69,22 @@ public class CommonDef extends WebActions{
 		} catch (ElementNotInteractableException e) {
 			logScreenshot("The Element "+ele+" is not Interactable");
 			throw new RuntimeException();
+		}
+	}
+	
+	public void waitForPageLoad() {
+		driver = DriverFactory.getCurrentDriver();
+		ExpectedCondition<Boolean> expect = new ExpectedCondition<Boolean>() {
+//			@Override
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+			}
+		};
+		wait = new WebDriverWait(driver, 120);
+		try {
+			wait.until(expect);
+		} catch (Exception E) {
+//			ExReporter.log(LogStatus.INFO, "Page Load Condition failed. Continuing with test");
 		}
 	}
 
