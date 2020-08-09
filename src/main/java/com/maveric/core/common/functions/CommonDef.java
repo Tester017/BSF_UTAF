@@ -74,6 +74,18 @@ public class CommonDef extends WebActions{
 		}
 	}
 	
+	/*Author: Praveen Description: To Enter Keys into a field*/
+	
+	public void sendKeys(By ele, String data) {
+		try {
+			driver.findElement(ele).sendKeys(data);
+			logScreenshot("The Data :"+data+" entered Successfully");
+		} catch (ElementNotInteractableException e) {
+			logScreenshot("The Element "+ele+" is not Interactable");
+			throw new RuntimeException();
+		}
+	}
+	
 	public void waitForPageLoad() {
 //		driver = DriverFactory.getCurrentDriver();
 		ExpectedCondition<Boolean> expect = new ExpectedCondition<Boolean>() 
