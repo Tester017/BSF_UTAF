@@ -141,7 +141,7 @@ public class DriverFactory {
                         put("deviceName", ConfigProperties.CHROME_DEVICE.get());
                     }});
         }
-        System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver.exe");
         return new ChromeDriver(chromeOptions);
         
     }

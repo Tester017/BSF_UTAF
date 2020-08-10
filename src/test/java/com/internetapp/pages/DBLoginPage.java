@@ -13,12 +13,14 @@ import static com.maveric.core.utils.reporter.Report.log;
 
 public class DBLoginPage extends CommonDef{
 
-//    @FindBy(name="username")
-//	private WebElement txt_username;
-    private final By txt_username = By.name("username");
+@FindBy(name="username") 
+private WebElement txt_username;
+// private final By txt_username = By.name("username");
     private final By txt_password = By.name("password");
     private final By txt_pin = By.name("accpin");
-    private final By btn_submit = By.id("submit");
+//    private final By btn_submit = By.id("submit");
+    @FindBy(id="submit") private WebElement btn_submit;
+
     public RecheckImpl recheckin;
     
     AppiumDriver<?> mobdriver;
@@ -50,7 +52,7 @@ public class DBLoginPage extends CommonDef{
     {    	
 
     	clearAndType(txt_username, userName);
-    	clearAndType(txt_password, password);
+//    	clearAndType(txt_password, password);
     	click(btn_submit);
         logScreenshot("login successful");
         

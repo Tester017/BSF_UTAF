@@ -7,8 +7,10 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.maveric.core.driver.DriverFactory;
@@ -32,9 +34,9 @@ public class CommonDef extends WebActions{
 	    		driver=driverFactory.mobdriverSetup();
 //	    		driver = new RecheckDriver((RemoteWebDriver) driver); 
 	    	}
-				
+	
 			driver.navigate().to(url);
-			waitForPageLoad();
+//			waitForPageLoad();
 			System.out.println(driver);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -49,13 +51,14 @@ public class CommonDef extends WebActions{
 
 	}
 	
-	public void click(By ele) {
+	public void click(WebElement ele) {
 		String text="";
 		try {
+
 			wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(ele));
-			text = driver.findElement(ele).getText();
-			driver.findElement(ele).click();
+			text = ele.getText();
+			ele.click();
 	        logScreenshot("The Element "+text+" clicked");
 		} catch (StaleElementReferenceException e) {
 			logScreenshot("The Element "+text+" could not be clicked");
@@ -63,10 +66,12 @@ public class CommonDef extends WebActions{
 		} 
 	}
 	
-	public void clearAndType(By ele, String data) {
+	public void clearAndType(WebElement ele, String data) {
 		try {
-			driver.findElement(ele).clear();
-			driver.findElement(ele).sendKeys(data);
+			wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions.visibilityOf(ele));
+			ele.clear();
+			ele.sendKeys(data);
 			logScreenshot("The Data :"+data+" entered Successfully");
 		} catch (ElementNotInteractableException e) {
 			logScreenshot("The Element "+ele+" is not Interactable");
@@ -105,5 +110,26 @@ public class CommonDef extends WebActions{
 //			ExReporter.log(LogStatus.INFO, "Page Load Condition failed. Continuing with test");
 		}
 	}
+	
+	public WebElement findElement(By by) 
+	{
+			return driver.findElement(by);
+	}
+	
+	public void dropdown(By by, String keysToSend) {
+		try {
+		Select select= new Select(findElement(by));
+		select.selectByVisibleText(keysToSend);
+		logScreenshot(keysToSend+" is selected successfully ");
+		} catch (Exception E) {
+		logScreenshot(keysToSend+" is not selected successfully ");
+		throw new RuntimeException();
+		}
+		}
+
+		
+		
+	
+
 
 }
