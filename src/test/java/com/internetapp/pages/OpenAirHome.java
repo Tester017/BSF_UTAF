@@ -11,9 +11,9 @@ public class OpenAirHome extends CommonDef{
     	click(findElement(By.xpath("//div[@class='item-inner']//span[contains(text(),'Timesheets')]")));                 
         return this;
     }
-	public OpenAirHome clickTimeSheetCategory(String category) 
+	public OpenAirHome clickTimeSheetCategory(String dCategory) 
 	{     
-    	click(findElement(By.xpath("//ul[@class='nav-menu-list']//span[contains(text(),'Timesheets')]//..//following::span[contains(text(),'"+ category +"')]")));                 
+    	click(findElement(By.xpath("//ul[@class='nav-menu-list']//span[contains(text(),'Timesheets')]//..//following::span[contains(text(),'"+ dCategory +"')]")));                 
         return this;
     }
 	public OpenAirHome clickCreateMenu() 
@@ -26,5 +26,14 @@ public class OpenAirHome extends CommonDef{
     	click(findElement(By.xpath("//span[contains(text(),'Timesheets: Timesheet, New')]")));                 
         return this;
     }
-
+	public OpenAirHome clickTargetedTimesheet(String date) 
+	{     
+    	click(findElement(By.xpath("//div[text()='"+date+"']/..//following-sibling::td//a")));                 
+        return this;
+    }
+	public OpenAirHome selectTimesheet(String dValueToSelect) 
+	{     
+		//dropdown(findElement(By.xpath("//div[text()='"+date+"']/..//following-sibling::td//a")));                 
+        return this;
+    }
 }

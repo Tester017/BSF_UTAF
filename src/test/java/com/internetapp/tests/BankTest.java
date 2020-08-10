@@ -1,9 +1,13 @@
 package com.internetapp.tests;
 
+import java.util.HashMap;
+
 import org.testng.annotations.Test;
 
 import com.codoid.products.exception.FilloException;
+import com.internetapp.pages.OpenAirHome;
 import com.internetapp.pages.OutlookLogin;
+import com.internetapp.tests.functions.BankFunctions;
 import com.maveric.core.testng.BaseTest;
 import com.maveric.core.testng.listeners.DriverListener;
 import com.maveric.core.utils.data.ExcelDataReader;
@@ -22,17 +26,11 @@ public class BankTest extends BaseTest {
 		{
 		
 		case "outlookLogin": 
-			new OutlookLogin()
-				.outlookNavigate(ExcelDataReader.getData("Sheet2", tcId, "url"), ExcelDataReader.getData("Sheet2", tcId, "driverType"))
-				.enterUserName(ExcelDataReader.getData("Sheet2", tcId, "userName"))
-				.clickNext()
-				.enterPassword(ExcelDataReader.getData("Sheet2", tcId, "password"))
-				.clickNext()
-				.clickStaySignNo();
+			new BankFunctions().loginToOutlook(tcId);
 			break;
 		
 		case "openAirProcess":
-//			steps.updateTimesheet();
+			//new BankFunctions().updateTimesheet(tcId);
 			break;	
 		}
 
